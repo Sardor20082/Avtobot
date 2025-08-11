@@ -1,8 +1,8 @@
 import os
 from flask import Flask, request
-import telebot
-from config import BOT_TOKEN, WEBHOOK_PATH, WEBHOOK_URL
-from handlers import bot  # handlers.py ichida bot = telebot.TeleBot(BOT_TOKEN) bo'lishi kerak
+from handlers import bot
+from config import WEBHOOK_PATH, WEBHOOK_URL
+from telebot.types import Update
 
 app = Flask(__name__)
 
@@ -13,8 +13,8 @@ def index():
 @app.route(WEBHOOK_PATH, methods=["POST"])
 def webhook():
     json_str = request.get_data().decode("utf-8")
-    print("Webhook update:", json_str)  # Log uchun
-    update = telebot.types.Update.de_json(json_str)
+    print("Webhook update:", json_str)
+    update = Update.de_json(json_str)
     bot.process_new_updates([update])
     return "", 200
 
