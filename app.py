@@ -13,7 +13,7 @@ def index():
 @app.route(WEBHOOK_PATH, methods=['POST'])
 def webhook():
     json_str = request.get_data().decode('utf-8')
-    print("Webhook update:", json_str)  # loglash
+    print("Webhookga update keldi:", json_str)  # Loglash uchun
     update = telebot.types.Update.de_json(json_str)
     bot.process_new_updates([update])
     return '', 200
@@ -22,4 +22,4 @@ if __name__ == "__main__":
     bot.remove_webhook()
     bot.set_webhook(url=WEBHOOK_URL)
     port = int(os.environ.get("PORT", 5000))  # Render uchun portni oling
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, threaded=True)
