@@ -1,5 +1,5 @@
 # BOT TOKEN
-BOT_TOKEN = "7896876084:AAHQspskPBvMJzEmweLVqOJFe4GslJ_AseA"
+BOT_TOKEN = "7626749090:AAFL--dyGniYyUVQ-U0sErxtwOL0qbrytXs"
 
 # API CONFIG
 BASE_URL = "https://partners.servcul.com/CashdeskBotAPI"
