@@ -1,14 +1,9 @@
-# BOT TOKEN
-BOT_TOKEN = "7626749090:AAFL--dyGniYyUVQ-U0sErxtwOL0qbrytXs"
-
-# API CONFIG
 BASE_URL = "https://partners.servcul.com/CashdeskBotAPI"
 HASH = "97d86d0d67984a07a213114c8c7aed880f8e40f0e6147e8349a3b5ea1d2a4fbb"
 CASHIERPASS = "ySu5B4a6"
 CASHDESK_ID = 1387168
-LANG = "ru"
+LANG = "en"  # <-- shu yerda ingliz tilini tanlaymiz
 
-# WEBHOOK CONFIG
 WEBHOOK_HOST = "https://avtobot-8drh.onrender.com"
 WEBHOOK_PATH = f"/{BOT_TOKEN}"
-WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}" 
+WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
