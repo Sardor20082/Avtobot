@@ -10,7 +10,6 @@ def sha256_hex(s: str) -> str:
     return hashlib.sha256(s.encode('utf-8')).hexdigest()
 
 def get_balance():
-    # UTC va vaqtni timezone aware qilib olish yaxshiroq
     dt_str = datetime.now(timezone.utc).strftime("%Y.%m.%d %H:%M:%S")
     confirm = md5_hex(f"{CASHDESK_ID}:{HASH}")
 
@@ -25,16 +24,14 @@ def get_balance():
     headers = {"Content-Type": "application/json", "sign": sign}
     params = {"confirm": confirm, "dt": dt_str}
 
-    r = requests.get(f"{BASE_URL}/Cashdesk/{CASHDESK_ID}/Balance", headers=headers, params=params)
-    return r.json()
+    response = requests.get(f"{BASE_URL}/Cashdesk/{CASHDESK_ID}/Balance", headers=headers, params=params)
+    return response.json()
 
 def deposit_to_user(user_id: int, amount: float):
     s1 = f"hash={HASH}&lng={LANG}&UserId={user_id}"
     sha1 = sha256_hex(s1)
 
-    # summa uchun string formatlash to'g'ri, 100.0 -> "100", 100.50 -> "100.5" emas, uni quyidagicha qilish mumkin:
     summa_str = f"{amount:.2f}".rstrip('0').rstrip('.')
-
     s2 = f"summa={summa_str}&cashierpass={CASHIERPASS}&cashdeskid={CASHDESK_ID}"
     md5_2 = md5_hex(s2)
 
@@ -48,8 +45,9 @@ def deposit_to_user(user_id: int, amount: float):
         "summa": amount,
         "confirm": confirm
     }
-    r = requests.post(f"{BASE_URL}/Deposit/{user_id}/Add", headers=headers, json=payload)
-    return r.json()
+
+    response = requests.post(f"{BASE_URL}/Deposit/{user_id}/Add", headers=headers, json=payload)
+    return response.json()
 
 def payout_to_user(user_id: int, code: str):
     s1 = f"hash={HASH}&lng={LANG}&UserId={user_id}"
@@ -68,5 +66,6 @@ def payout_to_user(user_id: int, code: str):
         "code": code,
         "confirm": confirm
     }
-    r = requests.post(f"{BASE_URL}/Deposit/{user_id}/Payout", headers=headers, json=payload)
-    return r.json()
+
+    response = requests.post(f"{BASE_URL}/Deposit/{user_id}/Payout", headers=headers, json=payload)
+    return response.json()
